@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 
 import com.example.demo.model.Holiday;
+import com.example.demo.repository.HolidayRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class HolidaysController {
+
+    @Autowired
+    private HolidayRepository holidayRepository;
 
     @GetMapping("/holidays/{display}")
     public String showHolidays(@PathVariable String display, Model model) {
@@ -26,12 +31,8 @@ public class HolidaysController {
         }
 
 
-        List<Holiday> holidays = Arrays.asList(
-                new Holiday("Jan 1", "New years eve", Holiday.Type.FESTIVAL),
-                new Holiday("Jan 6", "Halloween", Holiday.Type.FEDERAL),
-                new Holiday("Jan 10", "Christmas", Holiday.Type.FEDERAL),
-                new Holiday("Jan 30", "Today", Holiday.Type.FESTIVAL)
-        );
+        List<Holiday> holidays = holidayRepository.findAllHolidays();
+
         Holiday.Type[] types = Holiday.Type.values();
         for (Holiday.Type type : types) {
             model.addAttribute(type.toString(),

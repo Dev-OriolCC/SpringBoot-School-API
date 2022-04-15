@@ -24,7 +24,6 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureUrl("/login?error=true").permitAll()
                     .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()
                 .and().httpBasic();
-
     }
 
     // Create users
@@ -33,7 +32,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("user").password("oriolcesar").roles("USER")
                 .and()
-                .withUser("admin").password("oriolcesar").roles("USER", "ADMIN")
+                .withUser("admin").password("oriolcesar").roles("ADMIN")
                 .and().passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
