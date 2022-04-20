@@ -1,10 +1,13 @@
 package com.example.demo.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -19,6 +22,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/sendMessage").permitAll()
                 .mvcMatchers("/courses").permitAll()
                 .mvcMatchers("/about").permitAll()
+                .mvcMatchers("/register").authenticated()
                 .and().formLogin().loginPage("/login")
                     .defaultSuccessUrl("/dashboard")
                     .failureUrl("/login?error=true").permitAll()
@@ -26,15 +30,12 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().httpBasic();
     }
 
-    // Create users
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password("oriolcesar").roles("USER")
-                .and()
-                .withUser("admin").password("oriolcesar").roles("ADMIN")
-                .and().passwordEncoder(NoOpPasswordEncoder.getInstance());
+    // HASH Passwords
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
+
 
 
 

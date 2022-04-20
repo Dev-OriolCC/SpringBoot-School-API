@@ -37,7 +37,7 @@ public class Person extends BaseEntity{
 
     @NotBlank(message="Password must not be blank")
     @Size(min=5, message="Password must be at least 5 characters long")
-    @PasswordValidator
+    //@PasswordValidator
     private String pwd;
 
     @NotBlank(message="Confirm Password must not be blank")
