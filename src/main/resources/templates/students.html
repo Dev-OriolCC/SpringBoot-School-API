@@ -29,85 +29,71 @@
     </section>
     <!-- //inner banner -->
 
-    <!-- login block -->
-    <section class="w3l-contact py-5" id="contact">
-        <div class="container py-md-5 py-4">
-            <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
-                <h3 class="title-style" th:text="${'Welcome - ' + username}"></h3>
-                <p class="" th:text="${'You logged in as - ' + roles}"></p>
+    <!-- CONTENT -->
+    <div class="site-section">
+        <div class="table-responsive-class">
+            <div class="row mb-4">
+                <li class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(errorMessage)}"
+                    th:text="${errorMessage}" />
+                <div class="overview-wrap">
+                    <h3 class="heading-21921" th:text="${schoolClass.name} + ' Students Details'"></h3>
+                    <button class="btn btn-style btn-style-3 text-left" type="button"
+                            data-bs-toggle="modal" data-bs-target="#addStudent">ADD STUDENT</button>
+                </div>
             </div>
-
-            <div class="container-fluid">
-                <div class="row ">
-                    <a th:href="@{/profile}">
-                        <div class="overview-item overview-item--c3"
-                             style="background-color: #658CE0; border-radius: 20px">
-                            <div class="overview__inner">
-                                <div class="overview-box clearfix">
-                                    <div class="text">
-                                        <br><h2>Profile</h2>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="modal fade login-block" id="addStudent" tabindex="-1" role="dialog"
+                 aria-labelledby="addStudentModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-bottom-0">
+                            <h5 class="modal-title" id="addStudentModalLabel">Add Student</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                    </a>
-                    <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a th:href="@{/displayMessages}">
-                            <div class="overview-item overview-item--c3"
-                                 style="background-color: #658CE0; border-radius: 20px">
-                                <div class="overview__inner">
-                                    <div class="overview-box clearfix">
-                                        <div class="text">
-                                            <br><h2>Messages</h2>
-                                        </div>
-                                    </div>
+                        <form th:action="@{/addStudent}" method="post" class="signin-form" th:object="${person}">
+                            <div class="modal-body">
+                                <div class="input-grids">
+                                    <label class="control-label" for="email">Student Email </label>
+                                    <input type="email" class="form-control" name="email" id="email" th:field="*{email}"
+                                           required placeholder="Enter Student email">
                                 </div>
                             </div>
-                        </a>
-                        <a th:href="@{/register}">
-                            <div class="overview-item overview-item--c3"
-                                 style="background-color: #658CE0; border-radius: 20px; margin-top: 10px;">
-                                <div class="overview__inner">
-                                    <div class="overview-box clearfix">
-                                        <div class="text">
-                                            <br><h2>Create Students</h2>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-style btn-style-3">Submit</button>
                             </div>
-                        </a>
-                        <a th:href="@{/displayClasses}">
-                            <div class="overview-item overview-item--c3"
-                                 style="background-color: #658CE0; border-radius: 20px; margin-top: 10px;">
-                                <div class="overview__inner">
-                                    <div class="overview-box clearfix">
-                                        <div class="text">
-                                            <br><h2>Classes</h2>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a th:href="@{/displayCourses}">
-                            <div class="overview-item overview-item--c3"
-                                 style="background-color: #658CE0; border-radius: 20px; margin-top: 10px;">
-                                <div class="overview__inner">
-                                    <div class="overview-box clearfix">
-                                        <div class="text">
-                                            <br><h2>Courses</h2>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                        </form>
                     </div>
                 </div>
             </div>
-
-
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Mobile Num</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="person: ${schoolClass.persons}">
+                    <td th:text="${person.name}"></td>
+                    <td th:text="${person.email}"></td>
+                    <td th:text="${person.mobileNumber}"></td>
+                    <td><a th:href="@{/deleteStudent(personId=${person.personId})}" class="btn btn-warning">DELETE</a></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-    </section>
-    <!-- //login block -->
+        <div class="col-md-2 login-center text-start">
+            <a th:href="@{/displayClasses}">
+                <button class="btn btn-style btn-style-3 text-left">BACK</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- END-CONTENT -->
 
     <!-- footer block -->
     <div th:replace="footer :: footer">...</div>
