@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -13,6 +14,12 @@ public class Holiday extends BaseEntity {
     @Id
     private final String day;
 
+    public Holiday() {
+        this.day = "null";
+        this.reason = "null";
+        this.type = Type.FESTIVAL;
+    }
+
     private final String reason;
 
     @Enumerated(EnumType.STRING)
@@ -21,5 +28,6 @@ public class Holiday extends BaseEntity {
     public enum Type {
         FESTIVAL, FEDERAL
     }
+
 
 }

@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface HolidayRepository extends CrudRepository<Holiday, String> {
 
-
-
+    List<Holiday> findAll();
+    List<Holiday> findAllByType(Holiday.Type type);
 }

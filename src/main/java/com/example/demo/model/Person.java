@@ -1,6 +1,9 @@
 package com.example.demo.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -8,9 +11,25 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
+//@Data
+@Getter
+@Setter
 @Entity
+//@FieldsValueMatch.List({
+//        @FieldsValueMatch(
+//                field = "pwd",
+//                fieldMatch = "confirmPwd",
+//                message = "Passwords do not match!"
+//        ),
+//        @FieldsValueMatch(
+//                field = "email",
+//                fieldMatch = "confirmEmail",
+//                message = "Email addresses do not match!"
+//        )
+//})
 public class Person extends BaseEntity{
 
     @Id
@@ -56,5 +75,13 @@ public class Person extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "class_id", referencedColumnName = "classId", nullable = true)
     private SchoolClass schoolClass;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "person_courses",
+            joinColumns = {
+                    @JoinColumn(name = "person_id", referencedColumnName = "personId")},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "course_id", referencedColumnName = "courseId")})
+    private Set<Courses> courses = new HashSet<>();
 
 }

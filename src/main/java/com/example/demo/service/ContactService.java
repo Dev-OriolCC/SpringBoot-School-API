@@ -5,11 +5,10 @@ import com.example.demo.model.Contact;
 import com.example.demo.repository.ContactRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -36,17 +35,24 @@ public class ContactService {
     }
 
     //3
-    public boolean updateMessageStatus(int contactId) {
-        boolean isUpdated = false;
-        Optional<Contact> contact = contactRepository.findById(contactId);
-        contact.ifPresent(contact1 -> {
-            contact1.setStatus(schoolprojectconstants.CLOSE);
-        });
-        Contact updatedContact = contactRepository.save(contact.get());
-        if (null != updatedContact && updatedContact.getUpdatedBy() != null) {
-            isUpdated = true;
-        }
-        return isUpdated;
+    public void updateMessageStatus() {
+//        if(contact.getContactId() > 0 && contactRepository.existsById(contact.getContactId())) {
+//            contact.setStatus(schoolprojectconstants.CLOSE);
+//            contactRepository.save(contact);
+//        }
+
+
+//        boolean isUpdated = false;
+//        Optional<Contact> contact = contactRepository.findById(contactId);
+//        contact.ifPresent(contact1 -> {
+//            contact1.setStatus(schoolprojectconstants.CLOSE);
+//        });
+//        Contact updatedContact = contactRepository.save(contact.get());
+//        if (null != updatedContact && updatedContact.getUpdatedBy() != null) {
+//            isUpdated = true;
+//        }
+//        return isUpdated;
+
     }
 
 }

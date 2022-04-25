@@ -1,26 +1,30 @@
 package com.example.demo.controller;
 
+import com.example.demo.constants.schoolprojectconstants;
 import com.example.demo.model.Contact;
+import com.example.demo.model.Response;
+import com.example.demo.repository.ContactRepository;
 import com.example.demo.service.ContactService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Slf4j
-@Controller
+//@Controller
+@RestController
 public class ContactController {
     // Create log to display results
     // @Slf4j --> Creates the logic to log information
@@ -32,6 +36,10 @@ public class ContactController {
         this.contactService = contactService;
     }
 
+    @Autowired
+    ContactRepository contactRepository;
+
+    // Check how to return the HTML view and that's it
     @RequestMapping(value = "/contact")
     public String showContactPage(Model model) {
 
@@ -39,6 +47,7 @@ public class ContactController {
         return "contact";
     }
 
+    /*
     @RequestMapping(value = "sendMessage", method = RequestMethod.POST)
     public String sendMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors) {
         if (errors.hasErrors()) {
@@ -49,20 +58,76 @@ public class ContactController {
         contactService.sendMessageDetails(contact);
         return "redirect:/contact";
     }
+    */
+    // Working tested
+    @PostMapping("/sendMessage")
+    public ResponseEntity<Response> sendMessage(@Valid @ModelAttribute("contact") Contact contact, Errors errors) {
+        Response response = new Response();
+        if (errors.hasErrors()) {
+            response.setBody(errors.getFieldErrors());
+            response.setStatusCode("400");
+            response.setStatusMessage("Contact NOT sent");
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .header("contactSent", "false")
+                    .body(response);
+        }
+        contactService.sendMessageDetails(contact);
+        response.setStatusCode("200");
+        response.setStatusMessage("Contact sent successfully");
+        //response.setBody(contactRepository.findById(contact.getContactId()));
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .header("contactSent", "true")
+                .body(response);
 
-    //
+    }
+
+    // Working Tested!
     @RequestMapping("/displayMessages")
-    public ModelAndView displayMessages(Model model) {
+    public ResponseEntity<Response> displayMessages() {
         List<Contact> contactMessages = contactService.findMessageWithOpenStatus();
-        ModelAndView modelAndView = new ModelAndView("messages");
-        modelAndView.addObject("contactMessages",contactMessages);
-        return modelAndView;
+        Response response = new Response();
+        response.setStatusCode("200");
+        response.setStatusMessage("Contacts fetched successfully");
+        response.setBody(contactMessages);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .header("isFound", "true")
+                .body(response);
     }
 
-    @RequestMapping(value = "/closeMsg",method = GET)
-    public String closeMsg(@RequestParam int id) {
-        contactService.updateMessageStatus(id);
-        return "redirect:/displayMessages";
+    // Working Tested!
+    @PatchMapping("/closeMsg")
+    public ResponseEntity<Response> closeMsg(@RequestBody Contact contact) {
+        Response response = new Response();
+        Optional<Contact> contact_optional = contactRepository.findById(contact.getContactId());
+        if(contact_optional.isPresent()) {
+            //contactService.updateMessageStatus(contact.getContactId());
+            contact_optional.get().setStatus(schoolprojectconstants.CLOSE);
+            contactRepository.save(contact_optional.get());
+        } else {
+            response.setStatusCode("400");
+            response.setStatusMessage("Contact NOT updated");
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .header("contactUpdated", "false")
+                    .body(response);
+        }
+
+        response.setStatusCode("200");
+        response.setStatusMessage("Contact status updated");
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .header("contactUpdated", "true")
+                .body(response);
+        //return "redirect:/displayMessages";
     }
+
+//    @RequestMapping(value = "/closeMsg",method = GET)
+//    public String closeMsg(@RequestParam int id) {
+//        contactService.updateMessageStatus(id);
+//        return "redirect:/displayMessages";
+//    }
 
 }

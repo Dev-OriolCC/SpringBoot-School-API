@@ -14,7 +14,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //config to permit all the requests
-        http.csrf().ignoringAntMatchers("sendMessage").and()
+        http.csrf().disable()
+                //.ignoringAntMatchers("sendMessage").and()
                 .authorizeRequests()
                 .mvcMatchers("/home").permitAll()
                 .mvcMatchers("/holidays/**").permitAll()
@@ -24,9 +25,9 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/about").permitAll()
                 .mvcMatchers("/register").authenticated()
                 .and().formLogin().loginPage("/login")
-                    .defaultSuccessUrl("/dashboard")
-                    .failureUrl("/login?error=true").permitAll()
-                    .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()
+                .defaultSuccessUrl("/dashboard")
+                .failureUrl("/login?error=true").permitAll()
+                .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()
                 .and().httpBasic();
     }
 
