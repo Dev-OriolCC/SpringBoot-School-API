@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ public class Courses extends BaseEntity {
     @GenericGenerator(name = "native", strategy = "native")
     private int courseId;
 
+    @Size(min = 5, message = "Name must be at least 5 characters long")
     private String name;
 
     private String fees;

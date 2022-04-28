@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +30,7 @@ public class SchoolClass extends BaseEntity {
 
     @OneToMany(mappedBy = "schoolClass", fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST, targetEntity = Person.class)
+    @JsonIgnore
     private Set<Person> persons;
 
 
