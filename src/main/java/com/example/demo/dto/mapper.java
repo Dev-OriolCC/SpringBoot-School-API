@@ -31,7 +31,9 @@ public class mapper {
         personResponseDto.setAddress(person.getAddress());
         //personResponseDto.setSchoolClassId(person.getSchoolClass().getClassId());
         personResponseDto.setCourses(person.getCourses());
-        //
+        if(person.getSchoolClass() != null) {
+            personResponseDto.setSchoolClass(person.getSchoolClass());
+        }
         return personResponseDto;
     }
 

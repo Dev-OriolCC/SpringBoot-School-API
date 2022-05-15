@@ -24,5 +24,8 @@ public interface PersonService {
     // Address Section
     public PersonResponseDto addAddressToPerson(Integer personId, Integer addressId);
     public PersonResponseDto deleteAddressFromPerson(Integer personId);
+    // SchoolClass Section
+    public PersonResponseDto addSchoolClassToPerson(Integer personId, Integer schoolClassId);
+    public PersonResponseDto deleteSchoolClassFromPerson(Integer personId);
 
 }

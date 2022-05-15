@@ -14,6 +14,7 @@ import java.util.List;
 public class SchoolClassServiceImpl implements SchoolClassService {
 
     private final SchoolClassRepository schoolClassRepository;
+
     @Autowired
     public SchoolClassServiceImpl(SchoolClassRepository schoolClassRepository) {
         this.schoolClassRepository = schoolClassRepository;

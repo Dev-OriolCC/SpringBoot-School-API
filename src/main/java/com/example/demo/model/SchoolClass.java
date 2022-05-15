@@ -28,10 +28,19 @@ public class SchoolClass extends BaseEntity {
     @Size(min = 3, message = "Name must be at least 3 characters long")
     private String name;
 
-    @OneToMany(mappedBy = "schoolClass", fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST, targetEntity = Person.class)
+    @OneToMany(mappedBy = "schoolClass")
+    // fetch = FetchType.EAGER,
+    //            cascade = CascadeType.PERSIST, targetEntity = Person.class fetch = FetchType.EAGER,
+    //            cascade = CascadeType.PERSIST, targetEntity = Person.class
     @JsonIgnore
     private Set<Person> persons;
 
+    public Set<Person> getPersons() {
+        return persons;
+    }
+
+//    //public void setPersons(Set<Person> persons) {
+//        this.persons = persons;
+//    }
 
 }

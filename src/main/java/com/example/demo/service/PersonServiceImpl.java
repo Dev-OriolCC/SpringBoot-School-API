@@ -3,14 +3,8 @@ package com.example.demo.service;
 import com.example.demo.dto.mapper;
 import com.example.demo.dto.requestDto.PersonRequestDto;
 import com.example.demo.dto.responseDto.PersonResponseDto;
-import com.example.demo.model.Address;
-import com.example.demo.model.Courses;
-import com.example.demo.model.Person;
-import com.example.demo.model.Roles;
-import com.example.demo.repository.AddressRepository;
-import com.example.demo.repository.CoursesRepository;
-import com.example.demo.repository.PersonRepository;
-import com.example.demo.repository.RolesRepository;
+import com.example.demo.model.*;
+import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,14 +20,16 @@ public class PersonServiceImpl implements PersonService {
     private final CoursesService coursesService;
     private final CoursesRepository coursesRepository;
     private final AddressRepository addressRepository;
+    private final SchoolClassRepository schoolClassRepository;
 
     @Autowired
-    public PersonServiceImpl(PersonRepository personRepository, RolesRepository rolesRepository, CoursesService coursesService, CoursesRepository coursesRepository, AddressRepository addressRepository) {
+    public PersonServiceImpl(PersonRepository personRepository, RolesRepository rolesRepository, CoursesService coursesService, CoursesRepository coursesRepository, AddressRepository addressRepository, SchoolClassRepository schoolClassRepository) {
         this.personRepository = personRepository;
         this.rolesRepository = rolesRepository;
         this.coursesService = coursesService;
         this.coursesRepository = coursesRepository;
         this.addressRepository = addressRepository;
+        this.schoolClassRepository = schoolClassRepository;
     }
 
 
@@ -142,6 +138,26 @@ public class PersonServiceImpl implements PersonService {
     public PersonResponseDto deleteAddressFromPerson(Integer personId) {
         Person person = personRepository.findById(personId).get();
         person.setAddress(null);
+        personRepository.save(person);
+        return mapper.personToPersonResponseDto(person);
+    }
+
+    @Override
+    public PersonResponseDto addSchoolClassToPerson(Integer personId, Integer schoolClassId) {
+        Person person = personRepository.findById(personId).get();
+        SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId).get();
+        if(Objects.nonNull(person.getSchoolClass())) {
+            throw new RuntimeException("Person has already a CLass");
+        }
+        person.setSchoolClass(schoolClass);
+        personRepository.save(person);
+        return mapper.personToPersonResponseDto(person);
+    }
+
+    @Override
+    public PersonResponseDto deleteSchoolClassFromPerson(Integer personId) {
+        Person person = personRepository.findById(personId).get();
+        person.setSchoolClass(null);
         personRepository.save(person);
         return mapper.personToPersonResponseDto(person);
     }

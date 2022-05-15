@@ -7,6 +7,7 @@ import java.util.Set;
 
 @Data
 public class SchoolClassRequestDto {
+
     private String name;
     private Set<Person> persons;
 

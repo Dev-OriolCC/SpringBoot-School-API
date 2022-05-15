@@ -59,10 +59,19 @@ public class Person extends BaseEntity{
         this.address = address;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    //**********************************************************************************
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id", referencedColumnName = "classId", nullable = true)
-    @JsonIgnore
     private SchoolClass schoolClass;
+
+    public SchoolClass getSchoolClass() {
+        return schoolClass;
+    }
+
+    public void setSchoolClass(SchoolClass schoolClass) {
+        this.schoolClass = schoolClass;
+    }
+
 
     // Goood!
     @ManyToMany()

@@ -83,4 +83,17 @@ public class PersonController {
         return new ResponseEntity<>(personResponseDto, HttpStatus.OK);
     }
 
+    @PutMapping("/addSchoolClass/{schoolClassId}/to/{personId}")
+    public ResponseEntity<PersonResponseDto> addSchoolClassToPerson(@PathVariable final Integer schoolClassId,
+                                                                    @PathVariable final Integer personId) {
+        PersonResponseDto personResponseDto = personService.addSchoolClassToPerson(schoolClassId, personId);
+        return new ResponseEntity<>(personResponseDto, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteSchoolClass/{personId}")
+    public ResponseEntity<PersonResponseDto> deleteSchoolClassFromPerson(@PathVariable final Integer personId) {
+        PersonResponseDto personResponseDto = personService.deleteSchoolClassFromPerson(personId);
+        return new ResponseEntity<>(personResponseDto, HttpStatus.OK);
+    }
+
 }
