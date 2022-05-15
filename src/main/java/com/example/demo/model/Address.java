@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -34,9 +35,5 @@ public class Address extends BaseEntity {
     @NotBlank(message="State must not be blank")
     @Size(min=5, message="State must be at least 5 characters long")
     private String state;
-
-    @NotBlank(message="Zip Code must not be blank")
-    @Pattern(regexp="(^$|[0-9]{5})",message = "Zip Code must be 5 digits")
-    private int zipCode;
 
 }

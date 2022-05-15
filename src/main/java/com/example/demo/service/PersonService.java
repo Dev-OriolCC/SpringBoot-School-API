@@ -1,35 +1,28 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.requestDto.PersonRequestDto;
+import com.example.demo.dto.responseDto.PersonResponseDto;
 import com.example.demo.model.Person;
-import com.example.demo.model.Roles;
-import com.example.demo.repository.PersonRepository;
-import com.example.demo.repository.RolesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import io.swagger.models.auth.In;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class PersonService {
-
-    @Autowired
-    private PersonRepository personRepository;
-
-    @Autowired
-    private RolesRepository rolesRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    public boolean createNewPerson(Person person) {
-        boolean isSaved = false;
-        Roles student_role = rolesRepository.getById(1);
-        person.setRoles(student_role);
-        person.setPwd(passwordEncoder.encode(person.getPwd()));
-        person = personRepository.save(person);
-        if (null != person && person.getPersonId() > 0) {
-            isSaved = true;
-        }
-        return isSaved;
-    }
+public interface PersonService {
+    public PersonResponseDto addPerson(PersonRequestDto personRequestDto);
+    public List<PersonResponseDto> getPersons();
+    public PersonResponseDto getPersonById(Integer personId);
+    public Person getPerson(Integer personId);
+    public PersonResponseDto deletePerson(Integer personId);
+    public PersonResponseDto editPerson(Integer personId, PersonRequestDto personRequestDto);
+    // Roles Section
+    public PersonResponseDto addRoleToPerson(Integer personId, Integer roleId);
+    public PersonResponseDto deleteRoleFromPerson(Integer personId);
+    // Courses Section
+    public PersonResponseDto addCourseToPerson(Integer courseId, Integer personId);
+    // Address Section
+    public PersonResponseDto addAddressToPerson(Integer personId, Integer addressId);
+    public PersonResponseDto deleteAddressFromPerson(Integer personId);
 
 }

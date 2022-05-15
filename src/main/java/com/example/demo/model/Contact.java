@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Value;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -40,6 +42,6 @@ public class Contact extends BaseEntity {
     private String message;
 
     // NEW
-    private String status;
+    private Boolean status = false;
 
 }

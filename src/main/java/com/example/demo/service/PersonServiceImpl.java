@@ -1,0 +1,148 @@
+package com.example.demo.service;
+
+import com.example.demo.dto.mapper;
+import com.example.demo.dto.requestDto.PersonRequestDto;
+import com.example.demo.dto.responseDto.PersonResponseDto;
+import com.example.demo.model.Address;
+import com.example.demo.model.Courses;
+import com.example.demo.model.Person;
+import com.example.demo.model.Roles;
+import com.example.demo.repository.AddressRepository;
+import com.example.demo.repository.CoursesRepository;
+import com.example.demo.repository.PersonRepository;
+import com.example.demo.repository.RolesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Objects;
+
+@Service
+public class PersonServiceImpl implements PersonService {
+
+    private final PersonRepository personRepository;
+    private final RolesRepository rolesRepository; // TEST
+    private final CoursesService coursesService;
+    private final CoursesRepository coursesRepository;
+    private final AddressRepository addressRepository;
+
+    @Autowired
+    public PersonServiceImpl(PersonRepository personRepository, RolesRepository rolesRepository, CoursesService coursesService, CoursesRepository coursesRepository, AddressRepository addressRepository) {
+        this.personRepository = personRepository;
+        this.rolesRepository = rolesRepository;
+        this.coursesService = coursesService;
+        this.coursesRepository = coursesRepository;
+        this.addressRepository = addressRepository;
+    }
+
+
+    @Override
+    public PersonResponseDto addPerson(PersonRequestDto personRequestDto) {
+        Person person = new Person();
+        Roles roles = rolesRepository.getById(1); //  Student
+        person.setName(personRequestDto.getName());
+        person.setMobileNumber(personRequestDto.getMobileNumber());
+        person.setEmail(personRequestDto.getEmail());
+        person.setConfirmEmail(personRequestDto.getConfirmEmail());
+        person.setPwd(personRequestDto.getPwd());
+        person.setConfirmPwd(personRequestDto.getConfirmPwd());
+        person.setRoles(roles);
+        personRepository.save(person);
+        return mapper.personToPersonResponseDto(person);
+    }
+
+    @Override
+    public List<PersonResponseDto> getPersons() {
+        List<Person> persons = personRepository.findAll();
+        return mapper.personToPersonResponseDtos(persons);
+    }
+
+    @Override
+    public PersonResponseDto getPersonById(Integer personId) {
+        Person person = getPerson(personId);
+        return mapper.personToPersonResponseDto(person);
+    }
+
+    @Override
+    public Person getPerson(Integer personId) {
+        Person person = personRepository.findById(personId).orElseThrow(() ->
+                new IllegalArgumentException("Person not found with ID_"+personId));
+        return person;
+    }
+
+    @Override
+    public PersonResponseDto deletePerson(Integer personId) {
+        Person person = getPerson(personId);
+        personRepository.delete(person);
+        return mapper.personToPersonResponseDto(person);
+    }
+
+    @Override
+    public PersonResponseDto editPerson(Integer personId, PersonRequestDto personRequestDto) {
+        Person personToEdit = personRepository.findById(personId).get();
+        // Test
+        if(personRequestDto.getName() != null) {
+            personToEdit.setName(personRequestDto.getName());
+        }
+        if(personRequestDto.getEmail() != null) {
+            personToEdit.setEmail(personRequestDto.getEmail());
+        }
+        if(personRequestDto.getMobileNumber() != null) {
+            personToEdit.setMobileNumber(personRequestDto.getMobileNumber());
+        }
+        personRepository.save(personToEdit);
+        return mapper.personToPersonResponseDto(personToEdit);
+    }
+
+    @Transactional
+    @Override
+    public PersonResponseDto addRoleToPerson(Integer personId, Integer roleId) {
+        Person person = getPerson(personId);
+        if (Objects.nonNull(person.getRoles())) {
+            throw new RuntimeException("Person has a role");
+        }
+        Roles role = rolesRepository.getById(roleId);
+        person.setRoles(role);
+        return mapper.personToPersonResponseDto(person);
+    }
+
+//    @Transactional
+    @Override
+    public PersonResponseDto deleteRoleFromPerson(Integer personId) {
+        Person person = personRepository.findById(personId).get();
+        person.setRoles(null);
+        personRepository.save(person);
+        return mapper.personToPersonResponseDto(person);
+    }
+
+    //@Transactional
+    @Override
+    public PersonResponseDto addCourseToPerson(Integer personId, Integer courseId) {
+        Person person = personRepository.findById(courseId).get();
+        Courses course =  coursesRepository.findById(personId).get(); //coursesService.getCourse(courseId);
+        person.getCourses().add(course);
+        personRepository.save(person);
+        return mapper.personToPersonResponseDto(person);
+    }
+
+    @Override
+    public PersonResponseDto addAddressToPerson(Integer personId, Integer addressId) {
+        Person person = personRepository.findById(personId).get();
+        Address address =  addressRepository.findById(addressId).get();
+        if(Objects.nonNull(person.getAddress())){
+            throw new RuntimeException("Person has already an address");
+        }
+        person.setAddress(address);
+        personRepository.save(person);
+        return mapper.personToPersonResponseDto(person);
+    }
+
+    @Override
+    public PersonResponseDto deleteAddressFromPerson(Integer personId) {
+        Person person = personRepository.findById(personId).get();
+        person.setAddress(null);
+        personRepository.save(person);
+        return mapper.personToPersonResponseDto(person);
+    }
+}
