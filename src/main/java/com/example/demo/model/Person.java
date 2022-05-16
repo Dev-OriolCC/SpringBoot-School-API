@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,10 +44,14 @@ public class Person extends BaseEntity{
     private String confirmPwd;
 
     // Goood NOT
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Roles.class)
+    //@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id", referencedColumnName = "roleId", nullable = true)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Roles roles;
 
+    public Roles getRoles() { return roles; }
+    public void setRoles(Roles roles) { this.roles = roles; }
     // Good
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Address.class)
     @JoinColumn(name = "address_id", referencedColumnName = "addressId",nullable = true)
@@ -67,7 +72,6 @@ public class Person extends BaseEntity{
     public SchoolClass getSchoolClass() {
         return schoolClass;
     }
-
     public void setSchoolClass(SchoolClass schoolClass) {
         this.schoolClass = schoolClass;
     }
@@ -86,7 +90,6 @@ public class Person extends BaseEntity{
     public Set<Courses> getCourses() {
         return courses;
     }
-
     public void setCourses(Set<Courses> courses) {
         this.courses = courses;
     }

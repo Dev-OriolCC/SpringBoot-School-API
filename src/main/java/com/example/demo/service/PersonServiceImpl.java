@@ -94,11 +94,11 @@ public class PersonServiceImpl implements PersonService {
     @Transactional
     @Override
     public PersonResponseDto addRoleToPerson(Integer personId, Integer roleId) {
-        Person person = getPerson(personId);
+        Person person =  personRepository.findById(personId).get(); //getPerson(personId);
         if (Objects.nonNull(person.getRoles())) {
             throw new RuntimeException("Person has a role");
         }
-        Roles role = rolesRepository.getById(roleId);
+        Roles role = rolesRepository.findById(roleId).get();
         person.setRoles(role);
         return mapper.personToPersonResponseDto(person);
     }

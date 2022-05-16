@@ -10,6 +10,6 @@ public class CoursesResponseDto {
     private Integer courseId;
     private String name;
     private String fees;
-    private Set<Person> persons;
+    //private Set<Person> persons;
 
 }

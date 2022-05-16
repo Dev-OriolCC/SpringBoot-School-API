@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+@Data
 @Entity
 public class Roles extends BaseEntity{
     @Id
@@ -15,30 +16,30 @@ public class Roles extends BaseEntity{
 
     private String roleName;
 
-    @OneToOne(mappedBy = "roles")
-    private Person person;
+//    @OneToOne(mappedBy = "roles")
+//    private Person person;
 
-    public int getRoleId() {
-        return roleId;
-    }
+//    public int getRoleId() {
+//        return roleId;
+//    }
+//
+//    public void setRoleId(int roleId) {
+//        this.roleId = roleId;
+//    }
+//
+//    public String getRoleName() {
+//        return roleName;
+//    }
+//
+//    public void setRoleName(String roleName) {
+//        this.roleName = roleName;
+//    }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
+//    public Person getPerson() {
+//        return person;
+//    }
+//
+//    public void setPerson(Person person) {
+//        this.person = person;
+//    }
 }

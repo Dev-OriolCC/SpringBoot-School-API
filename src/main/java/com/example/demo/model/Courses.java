@@ -30,7 +30,6 @@ public class Courses extends BaseEntity {
     public Set<Person> getPersons() {
         return persons;
     }
-
     public void setPersons(Set<Person> persons) {
         this.persons = persons;
     }

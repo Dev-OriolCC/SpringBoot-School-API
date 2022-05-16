@@ -57,7 +57,7 @@ public class PersonController {
         return new ResponseEntity<>(personResponseDto, HttpStatus.OK);
     }
 
-    @PostMapping("/deleteRole/{personId}")
+    @DeleteMapping("/deleteRole/{personId}")
     public ResponseEntity<PersonResponseDto> deleteRoleFromPerson(@PathVariable final Integer personId) {
         PersonResponseDto personResponseDto = personService.deleteRoleFromPerson(personId);
         return new ResponseEntity<>(personResponseDto, HttpStatus.OK);

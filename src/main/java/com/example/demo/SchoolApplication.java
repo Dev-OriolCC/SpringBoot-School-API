@@ -17,5 +17,9 @@ public class SchoolApplication {
 		SpringApplication.run(SchoolApplication.class, args);
 
 	}
+	/* NOTES:
+	 * 1.- Fix relationship issue at the moment of fetching data from Person -> SchoolClass & Role [DONE]
+	 * 2.- Change roleId relationship to use the object instead.
+	 * */
 
 }

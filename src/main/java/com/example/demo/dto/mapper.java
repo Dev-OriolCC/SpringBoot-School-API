@@ -22,12 +22,10 @@ public class mapper {
         personResponseDto.setConfirmPwd(person.getConfirmPwd());//
         //
         // Condition when Role is NULL
-        if(person.getRoles() != null){
-            personResponseDto.setRoleId(person.getRoles().getRoleId());
-        }
-//        if (person.getAddress() != null) {
-//            personResponseDto.setAddressId(person.getAddress().getAddressId());
+//        if(person.getRoles() != null){
+//            personResponseDto.setRoles(person.getRoles());
 //        }
+        personResponseDto.setRoles(person.getRoles()); //NEW
         personResponseDto.setAddress(person.getAddress());
         //personResponseDto.setSchoolClassId(person.getSchoolClass().getClassId());
         personResponseDto.setCourses(person.getCourses());
@@ -51,7 +49,7 @@ public class mapper {
         coursesResponseDto.setCourseId(courses.getCourseId());
         coursesResponseDto.setName(courses.getName());
         coursesResponseDto.setFees(courses.getFees());
-        coursesResponseDto.setPersons(courses.getPersons());
+        //coursesResponseDto.setPersons(courses.getPersons());
         return coursesResponseDto;
     }
 

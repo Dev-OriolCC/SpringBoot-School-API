@@ -2,9 +2,11 @@ package com.example.demo.dto.responseDto;
 
 import com.example.demo.model.Address;
 import com.example.demo.model.Courses;
+import com.example.demo.model.Roles;
 import com.example.demo.model.SchoolClass;
 import lombok.Data;
 
+import javax.management.relation.Role;
 import java.util.Set;
 
 @Data
@@ -18,6 +20,7 @@ public class PersonResponseDto {
     private String confirmPwd;
     //
     private Integer roleId;
+    private Roles roles;
     //
     private Integer addressId;
     private Integer schoolClassId;
