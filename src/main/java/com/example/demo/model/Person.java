@@ -65,7 +65,9 @@ public class Person extends BaseEntity{
     }
 
     //**********************************************************************************
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "class_id", referencedColumnName = "classId", nullable = true)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "class_id", referencedColumnName = "classId", nullable = true)
     private SchoolClass schoolClass;
 

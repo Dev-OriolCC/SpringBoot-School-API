@@ -7,9 +7,11 @@ import java.util.Set;
 
 @Data
 public class CoursesResponseDto {
-    private Integer courseId;
+    // private Integer courseId;
     private String name;
     private String fees;
-    //private Set<Person> persons;
+    // --> Number of persons
+    private Integer students;
+    //private Set<Person> persons; --OLD
 
 }

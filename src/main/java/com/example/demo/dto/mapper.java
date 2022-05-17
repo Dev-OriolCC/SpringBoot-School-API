@@ -17,21 +17,18 @@ public class mapper {
         personResponseDto.setName(person.getName());
         personResponseDto.setMobileNumber(person.getMobileNumber());
         personResponseDto.setEmail(person.getEmail());
-        personResponseDto.setConfirmEmail(person.getConfirmEmail());
-        personResponseDto.setPwd(person.getPwd());
-        personResponseDto.setConfirmPwd(person.getConfirmPwd());//
-        //
-        // Condition when Role is NULL
-//        if(person.getRoles() != null){
-//            personResponseDto.setRoles(person.getRoles());
-//        }
-        personResponseDto.setRoles(person.getRoles()); //NEW
+        // ==== Changes
+//        personResponseDto.setConfirmEmail(person.getConfirmEmail());
+//        personResponseDto.setPwd(person.getPwd());
+//        personResponseDto.setConfirmPwd(person.getConfirmPwd());//
+        // ====
+
+        // === Relational Data ===
+        personResponseDto.setRoles(person.getRoles());
         personResponseDto.setAddress(person.getAddress());
-        //personResponseDto.setSchoolClassId(person.getSchoolClass().getClassId());
         personResponseDto.setCourses(person.getCourses());
-        if(person.getSchoolClass() != null) {
-            personResponseDto.setSchoolClass(person.getSchoolClass());
-        }
+        personResponseDto.setSchoolClass(person.getSchoolClass());
+
         return personResponseDto;
     }
 
@@ -46,10 +43,12 @@ public class mapper {
     //
     public static CoursesResponseDto coursesToCoursesResponseDto(Courses courses) {
         CoursesResponseDto coursesResponseDto = new CoursesResponseDto();
-        coursesResponseDto.setCourseId(courses.getCourseId());
+        // coursesResponseDto.setCourseId(courses.getCourseId());
         coursesResponseDto.setName(courses.getName());
         coursesResponseDto.setFees(courses.getFees());
-        //coursesResponseDto.setPersons(courses.getPersons());
+        // - Students
+        coursesResponseDto.setStudents(courses.getPersons().size());
+
         return coursesResponseDto;
     }
 
@@ -63,9 +62,9 @@ public class mapper {
     //
     public static SchoolClassResponseDto schoolClassToSchoolClassResponseDto(SchoolClass schoolClass) {
         SchoolClassResponseDto schoolClassResponseDto = new SchoolClassResponseDto();
-        schoolClassResponseDto.setClassId(schoolClass.getClassId());
         schoolClassResponseDto.setName(schoolClass.getName());
-        schoolClassResponseDto.setPersons(schoolClass.getPersons());
+        // schoolClassResponseDto.setPersons(schoolClass.getPersons());
+        schoolClassResponseDto.setStudents(schoolClass.getPersons().size());
         return schoolClassResponseDto;
     }
 

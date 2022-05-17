@@ -56,7 +56,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonResponseDto getPersonById(Integer personId) {
-        Person person = getPerson(personId);
+        Person person =  personRepository.findById(personId).get(); //getPerson(personId);
         return mapper.personToPersonResponseDto(person);
     }
 

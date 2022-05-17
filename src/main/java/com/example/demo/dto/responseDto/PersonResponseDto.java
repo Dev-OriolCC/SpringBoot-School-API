@@ -11,22 +11,23 @@ import java.util.Set;
 
 @Data
 public class PersonResponseDto {
-    private int personId;
+    // private int personId;
     private String name;
     private String mobileNumber;
     private String email;
-    private String confirmEmail;
-    private String pwd;
-    private String confirmPwd;
+    // private String confirmEmail;
+    // private String pwd;
+    // private String confirmPwd;
     //
-    private Integer roleId;
+    //  private Integer roleId;
+    // private Integer addressId;
+    // private Integer schoolClassId;
+
+    // === Relational Data ===
+    // New save object ER rather than ID pointer.
     private Roles roles;
-    //
-    private Integer addressId;
-    private Integer schoolClassId;
     private Set<Courses> courses;
     private Address address;
-    // New form rather than ID
     private SchoolClass schoolClass;
-
+    // === =============== ===
 }

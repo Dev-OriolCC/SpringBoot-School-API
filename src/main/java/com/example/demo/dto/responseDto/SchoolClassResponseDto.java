@@ -7,7 +7,9 @@ import java.util.Set;
 
 @Data
 public class SchoolClassResponseDto {
-    private Integer classId;
+    // private Integer classId;
     private String name;
-    private Set<Person> persons;
+    //private Set<Person> persons;
+    // --> Number of persons
+    private Integer students;
 }
