@@ -3,7 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.mapper;
 import com.example.demo.dto.requestDto.CoursesRequestDto;
 import com.example.demo.dto.responseDto.CoursesResponseDto;
-import com.example.demo.model.Courses;
+import com.example.demo.entities.Courses;
 import com.example.demo.repository.CoursesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +50,6 @@ public class CoursesServiceImpl implements CoursesService {
 
     @Override
     public CoursesResponseDto getCourseById(Integer courseId) {
-        return mapper.coursesToCoursesResponseDto(getCourse(courseId));
+        return mapper.coursesToCoursesResponseDto(getCourse(courseId)); 
     }
 }

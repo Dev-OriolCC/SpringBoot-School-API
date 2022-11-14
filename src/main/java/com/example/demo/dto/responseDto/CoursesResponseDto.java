@@ -1,11 +1,10 @@
 package com.example.demo.dto.responseDto;
 
-import com.example.demo.model.Person;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Set;
-
-@Data
+@Getter
+@Setter
 public class CoursesResponseDto {
     // private Integer courseId;
     private String name;

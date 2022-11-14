@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.requestDto.CoursesRequestDto;
 import com.example.demo.dto.responseDto.CoursesResponseDto;
-import com.example.demo.model.Courses;
 import com.example.demo.service.CoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

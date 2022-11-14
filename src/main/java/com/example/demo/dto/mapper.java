@@ -3,9 +3,9 @@ package com.example.demo.dto;
 import com.example.demo.dto.responseDto.CoursesResponseDto;
 import com.example.demo.dto.responseDto.PersonResponseDto;
 import com.example.demo.dto.responseDto.SchoolClassResponseDto;
-import com.example.demo.model.Courses;
-import com.example.demo.model.Person;
-import com.example.demo.model.SchoolClass;
+import com.example.demo.entities.Courses;
+import com.example.demo.entities.Person;
+import com.example.demo.entities.SchoolClass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +17,12 @@ public class mapper {
         personResponseDto.setName(person.getName());
         personResponseDto.setMobileNumber(person.getMobileNumber());
         personResponseDto.setEmail(person.getEmail());
-        // ==== Changes
-//        personResponseDto.setConfirmEmail(person.getConfirmEmail());
-//        personResponseDto.setPwd(person.getPwd());
-//        personResponseDto.setConfirmPwd(person.getConfirmPwd());//
-        // ====
-
         // === Relational Data ===
         personResponseDto.setRoles(person.getRoles());
         personResponseDto.setAddress(person.getAddress());
-        personResponseDto.setCourses(person.getCourses());
+        personResponseDto.setCourses(person.getCourses()); // 
         personResponseDto.setSchoolClass(person.getSchoolClass());
-
+        // 
         return personResponseDto;
     }
 
@@ -43,7 +37,6 @@ public class mapper {
     //
     public static CoursesResponseDto coursesToCoursesResponseDto(Courses courses) {
         CoursesResponseDto coursesResponseDto = new CoursesResponseDto();
-        // coursesResponseDto.setCourseId(courses.getCourseId());
         coursesResponseDto.setName(courses.getName());
         coursesResponseDto.setFees(courses.getFees());
         // - Students
@@ -63,7 +56,6 @@ public class mapper {
     public static SchoolClassResponseDto schoolClassToSchoolClassResponseDto(SchoolClass schoolClass) {
         SchoolClassResponseDto schoolClassResponseDto = new SchoolClassResponseDto();
         schoolClassResponseDto.setName(schoolClass.getName());
-        // schoolClassResponseDto.setPersons(schoolClass.getPersons());
         schoolClassResponseDto.setStudents(schoolClass.getPersons().size());
         return schoolClassResponseDto;
     }

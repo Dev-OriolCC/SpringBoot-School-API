@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.requestDto.SchoolClassRequestDto;
 import com.example.demo.dto.responseDto.SchoolClassResponseDto;
-import com.example.demo.model.SchoolClass;
+import com.example.demo.entities.SchoolClass;
 import com.example.demo.service.SchoolClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

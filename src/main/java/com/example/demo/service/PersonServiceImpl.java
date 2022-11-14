@@ -3,7 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.mapper;
 import com.example.demo.dto.requestDto.PersonRequestDto;
 import com.example.demo.dto.responseDto.PersonResponseDto;
-import com.example.demo.model.*;
+import com.example.demo.entities.*;
 import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

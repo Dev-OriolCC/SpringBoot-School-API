@@ -3,7 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.mapper;
 import com.example.demo.dto.requestDto.SchoolClassRequestDto;
 import com.example.demo.dto.responseDto.SchoolClassResponseDto;
-import com.example.demo.model.SchoolClass;
+import com.example.demo.entities.SchoolClass;
 import com.example.demo.repository.SchoolClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

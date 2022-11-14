@@ -2,8 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.requestDto.PersonRequestDto;
 import com.example.demo.dto.responseDto.PersonResponseDto;
-import com.example.demo.model.Person;
-import io.swagger.models.auth.In;
+import com.example.demo.entities.Person;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

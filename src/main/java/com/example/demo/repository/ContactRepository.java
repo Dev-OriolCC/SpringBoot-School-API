@@ -1,9 +1,7 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.Contact;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.entities.Contact;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

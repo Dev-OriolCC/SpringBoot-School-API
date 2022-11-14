@@ -1,11 +1,10 @@
 package com.example.demo.dto.requestDto;
 
-import com.example.demo.model.Holiday;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.EnumType;
-
-@Data
+@Getter
+@Setter
 public class HolidayRequestDto {
     private String day;
     private String reason;

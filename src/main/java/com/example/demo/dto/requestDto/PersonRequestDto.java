@@ -1,12 +1,14 @@
 package com.example.demo.dto.requestDto;
 
-import com.example.demo.model.Courses;
-import com.example.demo.model.Person;
+import com.example.demo.entities.Courses;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 public class PersonRequestDto {
     private String name;
     private String mobileNumber;

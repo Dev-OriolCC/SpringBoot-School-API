@@ -3,7 +3,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.requestDto.SchoolClassRequestDto;
 import com.example.demo.dto.responseDto.SchoolClassResponseDto;
-import com.example.demo.model.SchoolClass;
+import com.example.demo.entities.SchoolClass;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

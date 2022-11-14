@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.requestDto.CoursesRequestDto;
 import com.example.demo.dto.responseDto.CoursesResponseDto;
-import com.example.demo.model.Courses;
+import com.example.demo.entities.Courses;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

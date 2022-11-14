@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.requestDto.ContactRequestDto;
-import com.example.demo.model.Contact;
+import com.example.demo.entities.Contact;
 import com.example.demo.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

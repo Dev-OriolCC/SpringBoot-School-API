@@ -1,8 +1,11 @@
 package com.example.demo.dto.requestDto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class ContactRequestDto {
     private String name;
     private String mobileNum;

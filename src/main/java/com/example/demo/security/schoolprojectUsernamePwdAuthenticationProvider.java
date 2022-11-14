@@ -1,7 +1,7 @@
 package com.example.demo.security;
 
-import com.example.demo.model.Person;
-import com.example.demo.model.Roles;
+import com.example.demo.entities.Person;
+import com.example.demo.entities.Roles;
 import com.example.demo.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;

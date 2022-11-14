@@ -1,11 +1,14 @@
 package com.example.demo.dto.requestDto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class AddressRequestDto {
     private String address1;
     private String address2;
     private String city;
     private String state;
 }
+    

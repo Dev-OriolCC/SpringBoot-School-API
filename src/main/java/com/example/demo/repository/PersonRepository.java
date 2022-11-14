@@ -1,8 +1,8 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.Courses;
-import com.example.demo.model.Person;
-import com.example.demo.model.SchoolClass;
+import com.example.demo.entities.Courses;
+import com.example.demo.entities.Person;
+import com.example.demo.entities.SchoolClass;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

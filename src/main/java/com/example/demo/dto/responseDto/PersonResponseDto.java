@@ -1,15 +1,17 @@
 package com.example.demo.dto.responseDto;
 
-import com.example.demo.model.Address;
-import com.example.demo.model.Courses;
-import com.example.demo.model.Roles;
-import com.example.demo.model.SchoolClass;
+import com.example.demo.entities.Address;
+import com.example.demo.entities.Courses;
+import com.example.demo.entities.Roles;
+import com.example.demo.entities.SchoolClass;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.management.relation.Role;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 public class PersonResponseDto {
     // private int personId;
     private String name;
