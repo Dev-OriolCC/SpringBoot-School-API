@@ -4,6 +4,7 @@ import com.example.demo.entities.Address;
 import com.example.demo.entities.Courses;
 import com.example.demo.entities.Roles;
 import com.example.demo.entities.SchoolClass;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Builder
 public class PersonResponseDto {
     // private int personId;
     private String name;

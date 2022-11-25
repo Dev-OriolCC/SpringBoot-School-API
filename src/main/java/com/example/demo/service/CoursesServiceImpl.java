@@ -4,6 +4,7 @@ import com.example.demo.dto.mapper;
 import com.example.demo.dto.requestDto.CoursesRequestDto;
 import com.example.demo.dto.responseDto.CoursesResponseDto;
 import com.example.demo.entities.Courses;
+import com.example.demo.mapper.CourseMapper;
 import com.example.demo.repository.CoursesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,15 +22,13 @@ public class CoursesServiceImpl implements CoursesService {
 
     @Override
     public List<CoursesResponseDto> displayCourses() {
-        List<Courses> courses = coursesRepository.findAll();
+        List<Courses> courses = (List<Courses>) coursesRepository.findAll();
         return mapper.coursesToCoursesResponseDtos(courses);
     }
 
     @Override
     public CoursesResponseDto addCourse(CoursesRequestDto coursesRequestDto) {
-        Courses courses = new Courses();
-        courses.setName(coursesRequestDto.getName());
-        courses.setFees(coursesRequestDto.getFees());
+        Courses courses = CourseMapper.coursesRequestDtoToCourses(coursesRequestDto);
         coursesRepository.save(courses);
         return mapper.coursesToCoursesResponseDto(courses);
     }

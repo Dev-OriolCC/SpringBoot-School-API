@@ -19,31 +19,31 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @PostMapping("/addPerson")
+    @PostMapping("/")
     public ResponseEntity<PersonResponseDto> addPerson(@RequestBody final PersonRequestDto personRequestDto) {
         PersonResponseDto personResponseDto = personService.addPerson(personRequestDto);
         return new ResponseEntity<>(personResponseDto, HttpStatus.OK);
     }
 
-    @GetMapping("/getPersons")
+    @GetMapping("/")
     public ResponseEntity<List<PersonResponseDto>> getPersons() {
         List<PersonResponseDto> personResponseDtos = personService.getPersons();
         return new ResponseEntity<>(personResponseDtos, HttpStatus.OK);
     }
 
-    @GetMapping("/getPerson/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PersonResponseDto> getPersonById(@PathVariable final Integer id) {
         PersonResponseDto personResponseDto = personService.getPersonById(id);
         return new ResponseEntity<>(personResponseDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deletePerson/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<PersonResponseDto> deletePerson(@PathVariable final Integer id) {
         PersonResponseDto personResponseDto = personService.deletePerson(id);
         return new ResponseEntity<>(personResponseDto, HttpStatus.OK);
     }
 
-    @PutMapping("/editPerson/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<PersonResponseDto> editPerson(@PathVariable final Integer id,
                                                         @RequestBody final PersonRequestDto personRequestDto) {
         PersonResponseDto personResponseDto = personService.editPerson(id, personRequestDto);
@@ -57,7 +57,7 @@ public class PersonController {
         return new ResponseEntity<>(personResponseDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteRole/{personId}")
+    @DeleteMapping("/{personId}")
     public ResponseEntity<PersonResponseDto> deleteRoleFromPerson(@PathVariable final Integer personId) {
         PersonResponseDto personResponseDto = personService.deleteRoleFromPerson(personId);
         return new ResponseEntity<>(personResponseDto, HttpStatus.OK);

@@ -8,7 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ContactRepository extends CrudRepository<Contact, Integer> {
-    // Define specific methods
     List<Contact> findByStatus(String status);
-    
 }

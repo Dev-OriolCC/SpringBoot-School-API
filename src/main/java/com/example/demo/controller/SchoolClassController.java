@@ -21,25 +21,25 @@ public class SchoolClassController {
         this.schoolClassService = schoolClassService;
     }
 
-    @GetMapping("/getSchoolClasses")
+    @GetMapping("/")
     public ResponseEntity<List<SchoolClassResponseDto>> getSchoolClasses(){
         List<SchoolClassResponseDto> schoolClassList =  schoolClassService.getSchoolClasses();
         return new ResponseEntity<>(schoolClassList, HttpStatus.OK);
     }
 
-    @PostMapping("/addSchoolClass")
+    @PostMapping("/")
     public ResponseEntity<SchoolClassResponseDto> addSchoolClass(@RequestBody final SchoolClassRequestDto schoolClassRequestDto) {
         SchoolClassResponseDto schoolClass = schoolClassService.addNewClass(schoolClassRequestDto);
         return new ResponseEntity<>(schoolClass, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/deleteSchoolClass/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<SchoolClassResponseDto> deleteSchoolClass(@PathVariable final Integer id) {
         SchoolClassResponseDto schoolClassResponseDto = schoolClassService.deleteSchooClass(id);
         return new ResponseEntity<>(schoolClassResponseDto, HttpStatus.OK);
     }
 
-    @GetMapping("/getSchoolClass/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<SchoolClass> getSchoolClass(@PathVariable final Integer id) {
         SchoolClass schoolClassResponse = schoolClassService.getSchoolClass(id);
         return new ResponseEntity<>(schoolClassResponse, HttpStatus.OK);

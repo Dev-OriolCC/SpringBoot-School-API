@@ -20,25 +20,25 @@ public class ContactController {
         this.contactService = contactService;
     }
 
-    @GetMapping("/getContactMessages")
+    @GetMapping("/")
     public ResponseEntity<List<Contact>> getContactMessages() {
         List<Contact> contactMessagesList = contactService.displayContactMessages();
         return new ResponseEntity<>(contactMessagesList, HttpStatus.OK);
     }
 
-    @PostMapping("/addContactMessage")
+    @PostMapping("/")
     public ResponseEntity<Contact> addContactMessage(@RequestBody final ContactRequestDto contactRequestDto) {
         Contact contact = contactService.addContactMessages(contactRequestDto);
         return new ResponseEntity<>(contact, HttpStatus.OK);
     }
 
-    @PutMapping("/editContactMessage/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Contact> editContactMessage(@PathVariable final Integer id) {
         Contact contact = contactService.editContactMessage(id);
         return new ResponseEntity<>(contact, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteContactMessage/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Contact> deleteContactMessage(@PathVariable final  Integer id) {
         Contact contact = contactService.deleteContactMessage(id);
         return new ResponseEntity<>(contact, HttpStatus.OK);

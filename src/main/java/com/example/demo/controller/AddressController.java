@@ -20,13 +20,13 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @GetMapping("/getAddresses")
+    @GetMapping("/")
     public ResponseEntity<List<Address>> getAddresses() {
         List<Address> addressList = addressService.displayAddresses();
         return new ResponseEntity<>(addressList, HttpStatus.OK);
     }
 
-    @PostMapping("/addAddress")
+    @PostMapping("/")
     public ResponseEntity<Address> addAddress(@RequestBody final AddressRequestDto addressRequestDto) {
         Address address = addressService.addAddress(addressRequestDto);
         return new ResponseEntity<>(address, HttpStatus.OK);

@@ -22,25 +22,25 @@ public class CoursesController {
     }
 
 
-    @GetMapping("/displayCourses")
+    @GetMapping("/")
     public ResponseEntity<List<CoursesResponseDto>> displayCourses() {
         List<CoursesResponseDto> coursesResponseDtos = coursesService.displayCourses();
         return new ResponseEntity<>(coursesResponseDtos, HttpStatus.OK);
     }
 
-    @PostMapping("/addCourse")
+    @PostMapping("/")
     public ResponseEntity<CoursesResponseDto> addCourse(@RequestBody final CoursesRequestDto coursesRequestDto) {
         CoursesResponseDto coursesResponseDto = coursesService.addCourse(coursesRequestDto);
             return new ResponseEntity<>(coursesResponseDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteCourse/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<CoursesResponseDto> deleteCourse(@PathVariable final Integer id) {
         CoursesResponseDto coursesResponseDto = coursesService.deleteCourse(id);
         return new ResponseEntity<>(coursesResponseDto, HttpStatus.OK);
     }
 
-    @GetMapping("/getCourse/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CoursesResponseDto> getCourseById(@PathVariable final Integer id) {
         CoursesResponseDto coursesResponseDto = coursesService.getCourseById(id);
         return new ResponseEntity<>(coursesResponseDto, HttpStatus.OK);
