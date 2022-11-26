@@ -4,6 +4,7 @@ import com.example.demo.dto.mapper;
 import com.example.demo.dto.requestDto.PersonRequestDto;
 import com.example.demo.dto.responseDto.PersonResponseDto;
 import com.example.demo.entities.*;
+import com.example.demo.mapper.PersonMapper;
 import com.example.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,14 +36,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonResponseDto addPerson(PersonRequestDto personRequestDto) {
-        Person person = new Person();
+        Person person = PersonMapper.personRequestDtoToPerson(personRequestDto);
         Roles roles = rolesRepository.getById(1); //  Student
-        person.setName(personRequestDto.getName());
-        person.setMobileNumber(personRequestDto.getMobileNumber());
-        person.setEmail(personRequestDto.getEmail());
-        person.setConfirmEmail(personRequestDto.getConfirmEmail());
-        person.setPwd(personRequestDto.getPwd());
-        person.setConfirmPwd(personRequestDto.getConfirmPwd());
         person.setRoles(roles);
         personRepository.save(person);
         return mapper.personToPersonResponseDto(person);

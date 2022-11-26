@@ -15,7 +15,7 @@ import java.util.Set;
 @Setter
 @Builder
 public class PersonResponseDto {
-    // private int personId;
+    private int id;
     private String name;
     private String mobileNumber;
     private String email;

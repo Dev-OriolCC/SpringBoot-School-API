@@ -18,11 +18,8 @@ public class SchoolApplication {
 
 	}
 	/* NOTES:
-	 * 1.- Fix relationship issue at the moment of fetching data from Person -> SchoolClass [DONE] & Role [DONE]
-	 * 		-> Apparently relationship is working fine!
-	 * 2.- Re detail responses (dto's)
-	 * 3.- Test Creation
-	 * 4.- Connect to front-end or at least document
+	 * Refactor Controllers
+	 *
 	 * */
 
 }

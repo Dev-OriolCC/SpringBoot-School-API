@@ -40,8 +40,8 @@ public class SchoolClassController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SchoolClass> getSchoolClass(@PathVariable final Integer id) {
-        SchoolClass schoolClassResponse = schoolClassService.getSchoolClass(id);
+    public ResponseEntity<SchoolClassResponseDto> getSchoolClass(@PathVariable final Integer id) {
+        SchoolClassResponseDto schoolClassResponse = schoolClassService.getSchoolClass(id);
         return new ResponseEntity<>(schoolClassResponse, HttpStatus.OK);
 
     }

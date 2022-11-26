@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.requestDto.AddressRequestDto;
+import com.example.demo.dto.responseDto.AddressResponseDto;
 import com.example.demo.entities.Address;
 import com.example.demo.mapper.AddressMapper;
 import com.example.demo.repository.AddressRepository;
@@ -20,16 +21,16 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public List<Address> displayAddresses() {
-        List<Address> addresses = (List<Address>) addressRepository.findAll();
-        return addresses;
+    public List<AddressResponseDto> displayAddresses() {
+        List<Address> addresses = addressRepository.findAll();
+        return AddressMapper.addressToAddressResponseDtos(addresses);
     }
 
     @Override
-    public Address addAddress(AddressRequestDto addressRequestDto) {
+    public AddressResponseDto addAddress(AddressRequestDto addressRequestDto) {
         Address address = AddressMapper.addressRequestDtoToAddress(addressRequestDto);
         addressRepository.save(address);
-        return address;
+        return AddressMapper.AddressToAddressResponseDto(address);
     }
 
 }

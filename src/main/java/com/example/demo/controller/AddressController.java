@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.requestDto.AddressRequestDto;
-import com.example.demo.entities.Address;
+import com.example.demo.dto.responseDto.AddressResponseDto;
 import com.example.demo.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,14 +21,14 @@ public class AddressController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Address>> getAddresses() {
-        List<Address> addressList = addressService.displayAddresses();
+    public ResponseEntity<List<AddressResponseDto>> getAddresses() {
+        List<AddressResponseDto> addressList = addressService.displayAddresses();
         return new ResponseEntity<>(addressList, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Address> addAddress(@RequestBody final AddressRequestDto addressRequestDto) {
-        Address address = addressService.addAddress(addressRequestDto);
+    public ResponseEntity<AddressResponseDto> addAddress(@RequestBody final AddressRequestDto addressRequestDto) {
+        AddressResponseDto address = addressService.addAddress(addressRequestDto);
         return new ResponseEntity<>(address, HttpStatus.OK);
     }
 

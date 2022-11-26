@@ -14,6 +14,6 @@ public interface SchoolClassService {
     public List<SchoolClassResponseDto> getSchoolClasses();
     public SchoolClassResponseDto addNewClass(SchoolClassRequestDto schoolClassRequestDto);
     public SchoolClassResponseDto deleteSchooClass(Integer schoolClassId);
-    public SchoolClass getSchoolClass(Integer schoolClassId);
+    public SchoolClassResponseDto getSchoolClass(Integer schoolClassId);
 
 }

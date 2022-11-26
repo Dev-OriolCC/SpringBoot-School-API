@@ -4,6 +4,7 @@ import com.example.demo.dto.mapper;
 import com.example.demo.dto.requestDto.SchoolClassRequestDto;
 import com.example.demo.dto.responseDto.SchoolClassResponseDto;
 import com.example.demo.entities.SchoolClass;
+import com.example.demo.mapper.SchoolClassMapper;
 import com.example.demo.repository.SchoolClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,7 @@ public class SchoolClassServiceImpl implements SchoolClassService {
 
     @Override
     public SchoolClassResponseDto addNewClass(SchoolClassRequestDto schoolClassRequestDto) {
-        SchoolClass schoolClass = new SchoolClass();
-        schoolClass.setName(schoolClassRequestDto.getName());
-        schoolClass.setPersons(schoolClassRequestDto.getPersons());
+        SchoolClass schoolClass = SchoolClassMapper.schoolClassRequestDtoToSchoolClass(schoolClassRequestDto);
         schoolClassRepository.save(schoolClass);
         return mapper.schoolClassToSchoolClassResponseDto(schoolClass);
     }
@@ -44,10 +43,10 @@ public class SchoolClassServiceImpl implements SchoolClassService {
     }
 
     @Override
-    public SchoolClass getSchoolClass(Integer schoolClassId) {
+    public SchoolClassResponseDto getSchoolClass(Integer schoolClassId) {
         SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId).orElseThrow(()->
                 new IllegalArgumentException("Class not found!"+schoolClassId));
-        return schoolClass;
+        return SchoolClassMapper.schoolClassToSchoolClassResponseDto(schoolClass);
     }
 
 
